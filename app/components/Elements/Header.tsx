@@ -12,7 +12,20 @@ const MessageBar = () => {
   // Customize your own blue color variants
   const primaryColor = '#2196F3'; // Blue
   const accentColor = '#64B5F6'; // Light Blue
-
+  const rightButton = [
+    {
+      icon: Icons.videocam,
+      handler: () => alert('to be added'),
+    },
+    {
+      icon: Icons.call,
+      handler: () => alert('to be added'),
+    },
+    {
+      icon: Icons.informationCircle,
+      handler: () => alert('to be added'),
+    },
+  ];
   return (
     <Appbar.Header
       style={{
@@ -39,31 +52,16 @@ const MessageBar = () => {
 
       {/* Right icons (e.g., search, settings, etc.) */}
       <View style={styles.rightIconsContainer}>
-        <IconButton
-          style={{margin: 0}}
-          onPress={() => alert('add functionality')}
-          icon={() => (
-            <Icon size={25} color={palette.davysGrey} name={Icons.videocam} />
-          )}
-        />
-        <IconButton
-          style={{margin: 0}}
-          onPress={() => alert('add functionality')}
-          icon={() => (
-            <Icon size={20} color={palette.davysGrey} name={Icons.call} />
-          )}
-        />
-        <IconButton
-          style={{margin: 0}}
-          onPress={() => alert('add functionality')}
-          icon={() => (
-            <Icon
-              size={25}
-              color={palette.davysGrey}
-              name={Icons.informationCircle}
-            />
-          )}
-        />
+        {rightButton.map((item, id) => (
+          <IconButton
+            key={id}
+            style={{margin: 0}}
+            onPress={item.handler}
+            icon={() => (
+              <Icon size={25} color={palette.davysGrey} name={item.icon} />
+            )}
+          />
+        ))}
       </View>
     </Appbar.Header>
   );
@@ -73,7 +71,7 @@ const styles = StyleSheet.create({
   rightIconsContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginRight: 10,
+    // marginRight: 10,
   },
 });
 
