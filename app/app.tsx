@@ -10,11 +10,12 @@ import store from './Store/store';
 import {Provider} from 'react-redux';
 import {AppNavigator} from './navigators';
 import type {PropsWithChildren} from 'react';
-import {PaperProvider} from 'react-native-paper';
+import {PaperProvider, MD3DarkTheme, MD3LightTheme} from 'react-native-paper';
 import * as storage from './utils/mobile-storage';
 import {useNavigationPersistence} from './navigators';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {StyleSheet, Text, useColorScheme, View} from 'react-native';
+import {darkThemeColors, lightThemeColors} from './utils/colors';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -23,19 +24,19 @@ type SectionProps = PropsWithChildren<{
 export const NAVIGATION_PERSISTENCE_KEY = 'NAVIGATION_STATE';
 
 function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+  const colorScheme = useColorScheme();
+  const theme =
+    colorScheme === 'dark'
+      ? {...MD3DarkTheme, colors: lightThemeColors}
+      : {...MD3LightTheme, colors: darkThemeColors};
   const {
     initialNavigationState,
     onNavigationStateChange,
     isRestored: isNavigationStateRestored,
   } = useNavigationPersistence(storage, NAVIGATION_PERSISTENCE_KEY);
   return (
-    <Provider store={store}> 
-      <PaperProvider>
+    <Provider store={store}>
+      <PaperProvider theme={theme}>
         <AppNavigator
           initialState={initialNavigationState}
           onStateChange={onNavigationStateChange}

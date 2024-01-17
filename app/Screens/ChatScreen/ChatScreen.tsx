@@ -1,9 +1,11 @@
-import {View, Text, Image} from 'react-native';
-import React, {FC, useCallback, useEffect, useState} from 'react';
-import {StackScreenProps} from '@react-navigation/stack';
-import {NavigatorParamList} from '../../navigators';
-import {GiftedChat} from 'react-native-gifted-chat';
 import Video from 'react-native-video';
+import {View, Text} from 'react-native';
+import {Avatar, MD3Colors, useTheme, withTheme} from 'react-native-paper';
+import {GiftedChat} from 'react-native-gifted-chat';
+import {NavigatorParamList} from '../../navigators';
+import {StackScreenProps} from '@react-navigation/stack';
+import React, {FC, useCallback, useEffect, useState} from 'react';
+import MessageBar from '../../components/Elements/Header';
 
 type User = {
   _id: number;
@@ -21,6 +23,7 @@ type ChatItem = {
 export const ChatScreen: FC<
   StackScreenProps<NavigatorParamList, 'ChatScreen'>
 > = ({navigation}) => {
+  const {colors} = useTheme();
   const [messages, setMessages] = useState<any>([]);
 
   const generateRandomText = (): string => {
@@ -86,60 +89,60 @@ export const ChatScreen: FC<
     );
   }, []);
 
-  const colors = {
+  const baseColors = {
     grey: ' #F7F8FB',
     green: '#13322B',
     yellow: 'yellow',
   };
 
   return (
-    <GiftedChat
-      messages={messages}
-      onSend={messages => onSend(messages)}
-      user={{
-        _id: 2,
-      }}
-      timeTextStyle={{
-        right: {
-          color: 'white',
-        },
-      }}
-      onPressAvatar={() => {
-        alert('you can view avatar and profile');
-      }}
-      renderAvatar={img => {
-        return (
-          <Image
-            width={30}
-            height={30}
-            style={{borderRadius: 60}}
-            alt="noImage"
-            source={{uri: `${img.currentMessage?.user.avatar}`}}
-          />
-        );
-      }}
-      messagesContainerStyle={{
-        shadowColor: colors.yellow,
-        backgroundColor: colors.green,
-      }}
-      renderAvatarOnTop={false}
-      // renderUsername={user => {
-      //   console.log('this is jitendra ', user);
-      //   return <Text>{'user'}</Text>;
-      // }}
-      renderMessageVideo={item => {
-        return (
-          <Video
-            source={{uri: item.currentMessage?.video}} // Can be a URL or a local file.
-            onBuffer={() => console.log('video onBuffer')} // Callback when remote video is buffering
-            onError={() => console.log('video error')} // Callback when video cannot be loaded
-            style={{
-              height: 100,
-              width: 200,
-            }}
-          />
-        );
-      }}
-    />
+    <React.Fragment>
+      <MessageBar />
+      <GiftedChat
+        messages={messages}
+        onSend={messages => onSend(messages)}
+        user={{
+          _id: 2,
+        }}
+        timeTextStyle={{
+          right: {
+            color: 'white',
+          },
+        }}
+        onPressAvatar={() => {
+          alert('you can view avatar and profile');
+        }}
+        renderAvatar={img => {
+          return (
+            <Avatar.Image
+              size={50}
+              // style={{borderRadius: 60}}
+              source={{uri: `${img.currentMessage?.user.avatar}`}}
+            />
+          );
+        }}
+        messagesContainerStyle={{
+          backgroundColor: baseColors.green,
+        }}
+        renderAvatarOnTop={true}
+        // renderUsername={user => {
+        //   console.log('this is jitendra ', user);
+        //   return <Text>{'user'}</Text>;
+        // }}
+        renderMessageVideo={item => {
+          return (
+            <Video
+              source={{uri: item.currentMessage?.video}} // Can be a URL or a local file.
+              onBuffer={() => console.log('video onBuffer')} // Callback when remote video is buffering
+              onError={() => console.log('video error')} // Callback when video cannot be loaded
+              style={{
+                height: 100,
+                width: 200,
+              }}
+            />
+          );
+        }}
+      />
+    </React.Fragment>
   );
 };
