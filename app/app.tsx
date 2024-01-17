@@ -6,14 +6,16 @@
  */
 
 import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {StyleSheet, Text, useColorScheme, View} from 'react-native';
-
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import store from './Store/store';
+import {Provider} from 'react-redux';
 import {AppNavigator} from './navigators';
+import type {PropsWithChildren} from 'react';
+import {PaperProvider} from 'react-native-paper';
 import * as storage from './utils/mobile-storage';
 import {useNavigationPersistence} from './navigators';
-import {PaperProvider} from 'react-native-paper';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {StyleSheet, Text, useColorScheme, View} from 'react-native';
+
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
@@ -32,12 +34,14 @@ function App(): React.JSX.Element {
     isRestored: isNavigationStateRestored,
   } = useNavigationPersistence(storage, NAVIGATION_PERSISTENCE_KEY);
   return (
-    <PaperProvider>
-      <AppNavigator
-        initialState={initialNavigationState}
-        onStateChange={onNavigationStateChange}
-      />
-    </PaperProvider>
+    <Provider store={store}> 
+      <PaperProvider>
+        <AppNavigator
+          initialState={initialNavigationState}
+          onStateChange={onNavigationStateChange}
+        />
+      </PaperProvider>
+    </Provider>
   );
 }
 
