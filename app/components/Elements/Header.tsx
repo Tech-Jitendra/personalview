@@ -1,8 +1,11 @@
 // Import necessary dependencies
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
+// import Icon from 'react-native-vector-icons/Ionicons';
+import {Icons} from '../../theme/icons';
 import {Appbar, Avatar, IconButton, useTheme} from 'react-native-paper';
-
+import Icon from 'react-native-vector-icons/Ionicons';
+import {palette} from '../../theme';
 const MessageBar = () => {
   const theme = useTheme();
 
@@ -35,18 +38,9 @@ const MessageBar = () => {
       />
 
       {/* Right icons (e.g., search, settings, etc.) */}
-      <View style={styles.rightIconsContainer}>
-        <IconButton
-          icon="magnify"
-          //   color={}
-          onPress={() => console.log('Search pressed')}
-        />
-        <IconButton
-          icon="dots-vertical"
-          //   color={theme.colors.tertiary}
-          onPress={() => console.log('Settings pressed')}
-        />
-      </View>
+      {/* <View style={styles.rightIconsContainer}> */}
+        <Icon size={50} color={palette.davysGrey} name={Icons.infoIcon} />
+      {/* </View> */}
     </Appbar.Header>
   );
 };
