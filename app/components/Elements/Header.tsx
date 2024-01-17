@@ -12,6 +12,7 @@ const MessageBar = () => {
   // Customize your own blue color variants
   const primaryColor = '#2196F3'; // Blue
   const accentColor = '#64B5F6'; // Light Blue
+
   const rightButton = [
     {
       icon: Icons.videocam,
@@ -26,6 +27,7 @@ const MessageBar = () => {
       handler: () => alert('to be added'),
     },
   ];
+  
   return (
     <Appbar.Header
       style={{
