@@ -7,25 +7,18 @@
 
 import React from 'react';
 import type {PropsWithChildren} from 'react';
-import {
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import {StyleSheet, Text, useColorScheme, View} from 'react-native';
 
-import {
-  Colors,
-} from 'react-native/Libraries/NewAppScreen';
-import { AppNavigator } from './navigators';
-import * as storage from "./utils/mobile-storage"
-import { useNavigationPersistence } from './navigators';
-
+import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {AppNavigator} from './navigators';
+import * as storage from './utils/mobile-storage';
+import {useNavigationPersistence} from './navigators';
+import {PaperProvider} from 'react-native-paper';
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
 
-export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
+export const NAVIGATION_PERSISTENCE_KEY = 'NAVIGATION_STATE';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -39,12 +32,13 @@ function App(): React.JSX.Element {
     isRestored: isNavigationStateRestored,
   } = useNavigationPersistence(storage, NAVIGATION_PERSISTENCE_KEY);
   return (
-    <AppNavigator
-      initialState={initialNavigationState}
-      onStateChange={onNavigationStateChange}
-    />
+    <PaperProvider>
+      <AppNavigator
+        initialState={initialNavigationState}
+        onStateChange={onNavigationStateChange}
+      />
+    </PaperProvider>
   );
 }
-
 
 export default App;
