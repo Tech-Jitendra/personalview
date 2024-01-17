@@ -38,9 +38,33 @@ const MessageBar = () => {
       />
 
       {/* Right icons (e.g., search, settings, etc.) */}
-      {/* <View style={styles.rightIconsContainer}> */}
-        <Icon size={50} color={palette.davysGrey} name={Icons.infoIcon} />
-      {/* </View> */}
+      <View style={styles.rightIconsContainer}>
+        <IconButton
+          style={{margin: 0}}
+          onPress={() => alert('add functionality')}
+          icon={() => (
+            <Icon size={25} color={palette.davysGrey} name={Icons.videocam} />
+          )}
+        />
+        <IconButton
+          style={{margin: 0}}
+          onPress={() => alert('add functionality')}
+          icon={() => (
+            <Icon size={20} color={palette.davysGrey} name={Icons.call} />
+          )}
+        />
+        <IconButton
+          style={{margin: 0}}
+          onPress={() => alert('add functionality')}
+          icon={() => (
+            <Icon
+              size={25}
+              color={palette.davysGrey}
+              name={Icons.informationCircle}
+            />
+          )}
+        />
+      </View>
     </Appbar.Header>
   );
 };
