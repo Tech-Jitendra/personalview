@@ -6,19 +6,16 @@
  */
 
 import React from 'react';
+import {config} from './config';
 import store from './Store/store';
 import {Provider} from 'react-redux';
 import {AppNavigator} from './navigators';
-import type {PropsWithChildren} from 'react';
+import {useColorScheme} from 'react-native';
 import * as storage from './utils/mobile-storage';
 import {useNavigationPersistence} from './navigators';
-import {StyleSheet, Text, useColorScheme} from 'react-native';
+import {GluestackUIProvider} from '@gluestack-ui/themed';
 import {darkThemeColors, lightThemeColors} from './utils/colors';
 import {PaperProvider, MD3DarkTheme, MD3LightTheme} from 'react-native-paper';
-
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
 
 export const NAVIGATION_PERSISTENCE_KEY = 'NAVIGATION_STATE';
 
@@ -35,12 +32,14 @@ function App(): React.JSX.Element {
   } = useNavigationPersistence(storage, NAVIGATION_PERSISTENCE_KEY);
   return (
     <Provider store={store}>
-      <PaperProvider theme={theme}>
-        <AppNavigator
-          initialState={initialNavigationState}
-          onStateChange={onNavigationStateChange}
-        />
-      </PaperProvider>
+      <GluestackUIProvider config={config}>
+        <PaperProvider theme={theme}>
+          <AppNavigator
+            initialState={initialNavigationState}
+            onStateChange={onNavigationStateChange}
+          />
+        </PaperProvider>
+      </GluestackUIProvider>
     </Provider>
   );
 }
