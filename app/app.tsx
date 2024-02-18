@@ -6,12 +6,12 @@
  */
 
 import React from 'react';
-import {config} from './config';
 import store from './Store/store';
 import {Provider} from 'react-redux';
 import {AppNavigator} from './navigators';
 import {useColorScheme} from 'react-native';
 import * as storage from './utils/mobile-storage';
+import {config} from './config/gluestack-ui.config';
 import {useNavigationPersistence} from './navigators';
 import {GluestackUIProvider} from '@gluestack-ui/themed';
 import {darkThemeColors, lightThemeColors} from './utils/colors';
