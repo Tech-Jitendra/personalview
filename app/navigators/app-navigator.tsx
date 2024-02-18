@@ -21,12 +21,12 @@ import {
 } from '@react-navigation/native';
 // import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {navigationRef, useBackButtonHandler} from './navigation-utilities';
-import * as Screens from "./../Screens/index"
+import * as Screens from './../Screens/index';
 // import firebase, {ReactNativeFirebase} from '@react-native-firebase/app';
 
 // import messaging from '@react-native-firebase/messaging';
 import {Alert} from 'react-native';
-import { createNativeStackNavigator } from "@react-navigation/native-stack"
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 // import {useStores} from '../models';
 // import * as Device from 'expo-device';
 // import * as Notifications from 'expo-notifications';
@@ -53,6 +53,7 @@ export type NavigatorParamList = {
   dummy: undefined;
   ChatScreen: undefined;
   LoginScreen: undefined;
+  ProfileScreen: undefined;
 };
 
 // Documentation: https://reactnavigation.org/docs/stack-navigator/
@@ -85,6 +86,7 @@ const AppStack = () => {
       }}
       initialRouteName="ChatScreen">
       <Stack.Screen name="ChatScreen" component={Screens.ChatScreen} />
+      <Stack.Screen name="ProfileScreen" component={Screens.ProfileScreen} />
       {/*<Stack.Screen name="dummy" component={Screens.DummyScreen} />*/}
     </Stack.Navigator>
   );
@@ -96,152 +98,152 @@ interface NavigationProps
 export const AppNavigator = (props: NavigationProps) => {
   const colorScheme = useColorScheme();
 
-//   useEffect(() => {
-//     const unsubscribe = messaging().onMessage(async remoteMessage => {
-//       console.log(JSON.stringify(remoteMessage));
-//     });
-//     return unsubscribe;
-//   }, []);
-//   const {pushNotificationsStore, userStore, i18nStore} = useStores();
-//   let popupRef = useRef(null);
-//   const theme = useTheme();
+  //   useEffect(() => {
+  //     const unsubscribe = messaging().onMessage(async remoteMessage => {
+  //       console.log(JSON.stringify(remoteMessage));
+  //     });
+  //     return unsubscribe;
+  //   }, []);
+  //   const {pushNotificationsStore, userStore, i18nStore} = useStores();
+  //   let popupRef = useRef(null);
+  //   const theme = useTheme();
 
-//   const checkPermission = async () => {
-//     const isReg = firebase.messaging().isDeviceRegisteredForRemoteMessages;
+  //   const checkPermission = async () => {
+  //     const isReg = firebase.messaging().isDeviceRegisteredForRemoteMessages;
 
-//     const enabled = await firebase.messaging().hasPermission();
-//     if (enabled == 1) {
-//       // Get FCM Token
-//       getToken();
-//     } else {
-//       // Request Permission
-//       requestPermission();
-//     }
-//   };
+  //     const enabled = await firebase.messaging().hasPermission();
+  //     if (enabled == 1) {
+  //       // Get FCM Token
+  //       getToken();
+  //     } else {
+  //       // Request Permission
+  //       requestPermission();
+  //     }
+  //   };
 
-//   const requestPermission = async () => {
-//     try {
-//       const authStatus = await messaging().requestPermission();
-//       const enabled =
-//         authStatus == messaging.AuthorizationStatus.AUTHORIZED ||
-//         authStatus == messaging.AuthorizationStatus.PROVISIONAL;
-//       if (enabled) {
-//         getToken();
-//       }
-//     } catch (error) {}
-//   };
+  //   const requestPermission = async () => {
+  //     try {
+  //       const authStatus = await messaging().requestPermission();
+  //       const enabled =
+  //         authStatus == messaging.AuthorizationStatus.AUTHORIZED ||
+  //         authStatus == messaging.AuthorizationStatus.PROVISIONAL;
+  //       if (enabled) {
+  //         getToken();
+  //       }
+  //     } catch (error) {}
+  //   };
 
-//   // TODO: Get FCM Token
-//   const getToken = async () => {
-//     let fcmToken = await messaging().getToken();
-//     let data = {
-//       registration_id: fcmToken,
-//       type: Platform.OS,
-//     };
-//     console.log('this is working or not how we know that ', data);
-//     pushNotificationsStore.setFCMToken(data);
-//     // AuthActions.setFCMToken(dispatch, data)
-//   };
-//   const backgroundHandler = () => {
-//     messaging().onNotificationOpenedApp(async remoteMessage => {
-//       console.log('this is background message for you ', remoteMessage);
-//     });
-//     messaging()
-//       .getInitialNotification()
-//       .then(async remoteMessage => {
-//         console.log('this is remote message for you ', remoteMessage);
-//       });
-//   };
+  //   // TODO: Get FCM Token
+  //   const getToken = async () => {
+  //     let fcmToken = await messaging().getToken();
+  //     let data = {
+  //       registration_id: fcmToken,
+  //       type: Platform.OS,
+  //     };
+  //     console.log('this is working or not how we know that ', data);
+  //     pushNotificationsStore.setFCMToken(data);
+  //     // AuthActions.setFCMToken(dispatch, data)
+  //   };
+  //   const backgroundHandler = () => {
+  //     messaging().onNotificationOpenedApp(async remoteMessage => {
+  //       console.log('this is background message for you ', remoteMessage);
+  //     });
+  //     messaging()
+  //       .getInitialNotification()
+  //       .then(async remoteMessage => {
+  //         console.log('this is remote message for you ', remoteMessage);
+  //       });
+  //   };
 
-//   // TODO: Listen to notification in foreground state
-//   const foreground = () => {
-//     messaging().onMessage(async remoteMessage => {
-//       console.log('FOREGROUND :: ', remoteMessage);
-//       popupRef.current.show({
-//         appTitle: 'Admin',
-//         title: remoteMessage.notification.title,
-//         body: remoteMessage.notification.body,
-//         slideOutTime: 2000,
-//       });
-//     });
-//   };
+  //   // TODO: Listen to notification in foreground state
+  //   const foreground = () => {
+  //     messaging().onMessage(async remoteMessage => {
+  //       console.log('FOREGROUND :: ', remoteMessage);
+  //       popupRef.current.show({
+  //         appTitle: 'Admin',
+  //         title: remoteMessage.notification.title,
+  //         body: remoteMessage.notification.body,
+  //         slideOutTime: 2000,
+  //       });
+  //     });
+  //   };
 
-//   const renderCustomPopup = ({
-//     appIconSource,
-//     appTitle,
-//     timeText,
-//     title,
-//     body,
-//   }) => (
-//     <View
-//       p={5}
-//       borderRadius={'5'}
-//       borderColor={'white'}
-//       borderWidth={'2px'}
-//       bg={'#f0f0f0'}>
-//       <Row alignItems={'center'}>
-//         <Image
-//           height={'40px'}
-//           width={'40px'}
-//           source={Images.app_logo2}
-//           alt={'push'}
-//         />
-//         <View>
-//           <Text
-//             mx={'4'}
-//             {...getThemeTypography(
-//               theme,
-//               appendLanguageKeyToThemeTypography(
-//                 'heading.6',
-//                 i18nStore.getCurrentLanguage(),
-//               ),
-//             )}>
-//             {title}
-//           </Text>
-//           <Text
-//             mx={'4'}
-//             {...getThemeTypography(
-//               theme,
-//               appendLanguageKeyToThemeTypography(
-//                 'paragraph.6',
-//                 i18nStore.getCurrentLanguage(),
-//               ),
-//             )}>
-//             {body}
-//           </Text>
-//         </View>
-//       </Row>
+  //   const renderCustomPopup = ({
+  //     appIconSource,
+  //     appTitle,
+  //     timeText,
+  //     title,
+  //     body,
+  //   }) => (
+  //     <View
+  //       p={5}
+  //       borderRadius={'5'}
+  //       borderColor={'white'}
+  //       borderWidth={'2px'}
+  //       bg={'#f0f0f0'}>
+  //       <Row alignItems={'center'}>
+  //         <Image
+  //           height={'40px'}
+  //           width={'40px'}
+  //           source={Images.app_logo2}
+  //           alt={'push'}
+  //         />
+  //         <View>
+  //           <Text
+  //             mx={'4'}
+  //             {...getThemeTypography(
+  //               theme,
+  //               appendLanguageKeyToThemeTypography(
+  //                 'heading.6',
+  //                 i18nStore.getCurrentLanguage(),
+  //               ),
+  //             )}>
+  //             {title}
+  //           </Text>
+  //           <Text
+  //             mx={'4'}
+  //             {...getThemeTypography(
+  //               theme,
+  //               appendLanguageKeyToThemeTypography(
+  //                 'paragraph.6',
+  //                 i18nStore.getCurrentLanguage(),
+  //               ),
+  //             )}>
+  //             {body}
+  //           </Text>
+  //         </View>
+  //       </Row>
 
-//       {/* <Button title='My button' onPress={() => console.log('Popup button onPress!')} /> */}
-//     </View>
-//   );
+  //       {/* <Button title='My button' onPress={() => console.log('Popup button onPress!')} /> */}
+  //     </View>
+  //   );
 
-//   // TODO: Display notification popup when app is in foreground
-//   const getNotificationPopup = () => {
-//     return (
-//       <NotificationPopup
-//         renderPopupContent={renderCustomPopup}
-//         shouldChildHandleResponderStart={true}
-//         shouldChildHandleResponderMove={true}
-//         ref={popupRef}
-//       />
-//     );
-//   };
-//   useEffect(() => {
-//     setTimeout(() => {
-//       checkPermission();
-//       foreground();
-//       backgroundHandler();
-//     }, 1000);
+  //   // TODO: Display notification popup when app is in foreground
+  //   const getNotificationPopup = () => {
+  //     return (
+  //       <NotificationPopup
+  //         renderPopupContent={renderCustomPopup}
+  //         shouldChildHandleResponderStart={true}
+  //         shouldChildHandleResponderMove={true}
+  //         ref={popupRef}
+  //       />
+  //     );
+  //   };
+  //   useEffect(() => {
+  //     setTimeout(() => {
+  //       checkPermission();
+  //       foreground();
+  //       backgroundHandler();
+  //     }, 1000);
 
-//     storage.getItem('access_token').then(t => {
-//       if (t) {
-//         userStore.getLoggedInUser();
-//       } else {
-//         userStore.logoutUser();
-//       }
-//     });
-//   }, []);
+  //     storage.getItem('access_token').then(t => {
+  //       if (t) {
+  //         userStore.getLoggedInUser();
+  //       } else {
+  //         userStore.logoutUser();
+  //       }
+  //     });
+  //   }, []);
   useBackButtonHandler(canExit);
 
   return (

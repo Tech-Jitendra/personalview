@@ -10,12 +10,11 @@ import store from './Store/store';
 import {Provider} from 'react-redux';
 import {AppNavigator} from './navigators';
 import type {PropsWithChildren} from 'react';
-import {PaperProvider, MD3DarkTheme, MD3LightTheme} from 'react-native-paper';
 import * as storage from './utils/mobile-storage';
 import {useNavigationPersistence} from './navigators';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-import {StyleSheet, Text, useColorScheme, View} from 'react-native';
+import {StyleSheet, Text, useColorScheme} from 'react-native';
 import {darkThemeColors, lightThemeColors} from './utils/colors';
+import {PaperProvider, MD3DarkTheme, MD3LightTheme} from 'react-native-paper';
 
 type SectionProps = PropsWithChildren<{
   title: string;
