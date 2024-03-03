@@ -21,7 +21,7 @@ import {
 } from '@react-navigation/native';
 // import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {navigationRef, useBackButtonHandler} from './navigation-utilities';
-// import * as Screens from './../Screens/index';
+import * as Screens from './../screens/index';
 // import firebase, {ReactNativeFirebase} from '@react-native-firebase/app';
 
 // import messaging from '@react-native-firebase/messaging';
@@ -84,7 +84,7 @@ const AppStack = () => {
         headerShown: false,
         // gestureEnabled: false,
       }}
-      initialRouteName="ChatScreen">
+      initialRouteName="ProfileScreen">
       <Stack.Screen name="ChatScreen" component={Screens.ChatScreen} />
       <Stack.Screen name="ProfileScreen" component={Screens.ProfileScreen} />
       {/*<Stack.Screen name="dummy" component={Screens.DummyScreen} />*/}
