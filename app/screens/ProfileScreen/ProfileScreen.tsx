@@ -1,7 +1,7 @@
 import React from 'react';
 import {TouchableOpacity} from 'react-native';
 import {Icons as IconLink} from '../../theme/icons';
-// import Icon
+import Icon from 'react-native-vector-icons/Ionicons';
 import {StackScreenProps} from '@react-navigation/stack';
 import LinearGradient from 'react-native-linear-gradient';
 import {View, Text, Pressable} from '@gluestack-ui/themed';
@@ -38,17 +38,32 @@ export const ProfileScreen: React.FC<
     },
   ];
 
+  // const commonFlexBetween = {
+  //   flexDirection: 'row',
+  //   alignItems: 'center',
+  //   justifyContent: 'space-between',
+  // };
+
   return (
     <View height={windowHeight}>
       <LinearGradient
         colors={['#EAF6FF', '#B5D8FF']}
-        style={{padding: 20, paddingTop: 200, height: windowHeight}}>
-        <View flexDirection="row" justifyContent="space-between">
-          {rightButtons.map((item, id) => (
-            <Pressable onPress={item.handler}>
-              {/* <Icon name={'accessibility'} size={'30px'} color="#900" /> */}
-            </Pressable>
-          ))}
+        style={{padding: 20, height: windowHeight}}>
+        <View
+          flexDirection="row"
+          alignItems="center"
+          justifyContent="space-between">
+          <View>
+            <Text>Jitendra</Text>
+          </View>
+          {/* audio or video call icon */}
+          <View>
+            {rightButtons.map((item, id) => (
+              <Pressable onPress={item.handler}>
+                <Icon name={item.icon} size={30} color="#900" />
+              </Pressable>
+            ))}
+          </View>
         </View>
         <View bg="white" borderRadius={20} p={20} pb={40} mt={20}>
           <View mt={20} mb={40}>
