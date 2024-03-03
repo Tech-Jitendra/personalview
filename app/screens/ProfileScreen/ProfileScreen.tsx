@@ -4,9 +4,10 @@ import {Icons as IconLink} from '../../theme/icons';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {StackScreenProps} from '@react-navigation/stack';
 import LinearGradient from 'react-native-linear-gradient';
-import {View, Text, Pressable} from '@gluestack-ui/themed';
+import {View, Text, Pressable, Theme, useTheme} from '@gluestack-ui/themed';
 import {NavigatorParamList} from './../../navigators/index';
 import {windowHeight} from '../../utils/global';
+import {config} from '@gluestack-ui/config';
 
 export const ProfileScreen: React.FC<
   StackScreenProps<NavigatorParamList, 'ProfileScreen'>
@@ -22,6 +23,7 @@ export const ProfileScreen: React.FC<
   const handleEditProfile = () => {
     // Navigation logic for editing profile
   };
+  const theme = useTheme();
 
   const rightButtons = [
     {
@@ -38,29 +40,36 @@ export const ProfileScreen: React.FC<
     },
   ];
 
-  // const commonFlexBetween = {
-  //   flexDirection: 'row',
-  //   alignItems: 'center',
-  //   justifyContent: 'space-between',
-  // };
+  console.log('this is theme ', theme);
 
   return (
     <View height={windowHeight}>
       <LinearGradient
-        colors={['#EAF6FF', '#B5D8FF']}
+        colors={['#EAF6FF', config.tokens.colors.emerald600]}
         style={{padding: 20, height: windowHeight}}>
         <View
           flexDirection="row"
           alignItems="center"
           justifyContent="space-between">
+          {/* user name */}
           <View>
-            <Text>Jitendra</Text>
+            <Text fontSize={24} fontWeight="bold" color='$purple700'>
+              Jitendra
+            </Text>
           </View>
           {/* audio or video call icon */}
-          <View>
+          <View
+            width={120}
+            flexDirection="row"
+            alignItems="center"
+            justifyContent="space-between">
             {rightButtons.map((item, id) => (
               <Pressable onPress={item.handler}>
-                <Icon name={item.icon} size={30} color="#900" />
+                <Icon
+                  name={item.icon}
+                  size={30}
+                  color={config.tokens.colors.red400}
+                />
               </Pressable>
             ))}
           </View>
